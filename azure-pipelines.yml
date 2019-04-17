@@ -1,0 +1,116 @@
+pool:
+  vmImage: 'VS2017-Win2016'
+
+trigger:
+  branches:
+    include:
+    - master
+  paths:
+    exclude:
+    - README.md
+
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
+  #Pack1 -------------------
+  #Authentication.CookiesByJwtBearer
+  #Configuration
+  Pack1Version: '1.0.0'
+  Pack1PushToNuget: False
+
+steps:
+# Install NuGet Tool
+- task: NuGetToolInstaller@0
+  displayName: Install NuGet Tool
+
+# Restore NuGet packages
+- task: NuGetCommand@2
+  displayName: Restore NuGet Packages
+  inputs:
+    restoreSolution: '$(solution)'
+
+# Prepare analysis on SonarCloud
+- task: SonarSource.sonarcloud.14d9cde6-c1da-4d55-aa01-2965cd301255.SonarCloudPrepare@1
+  displayName: Prepare analysis on SonarCloud
+  inputs:
+    SonarCloud: 'apikey-sonar-aspnetcore-webapp'
+    organization: 'ivanborges-github'
+    projectKey: 'ivanborges_furiza-aspnetcore-webapp'
+    projectName: 'furiza-aspnetcore-webapp'
+
+# Build solution
+- task: VSBuild@1
+  displayName: Build Solution
+  inputs:
+    solution: '$(solution)'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+# Run unit tests
+- task: VSTest@2
+  displayName: Run Unit Tests
+  inputs:
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+# Run Code Analysis
+- task: SonarSource.sonarcloud.ce096e50-6155-4de8-8800-4221aaeed4a1.SonarCloudAnalyze@1
+  displayName: Run Code Analysis
+
+# Publish Quality Gate Result
+- task: SonarSource.sonarcloud.38b27399-a642-40af-bb7d-9971f69712e8.SonarCloudPublish@1
+  displayName: Publish Quality Gate Result
+
+# Prepare publish files
+- task: DotNetCoreCLI@2
+  displayName: Prepare Publish Files
+  inputs:
+    command: publish
+    publishWebProjects: False
+    projects: '**/**/Furiza.AspNetCore.WebApp.*.csproj'
+    arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+    zipAfterPublish: False
+
+# Publish the artifacts
+- task: PublishBuildArtifacts@1
+  displayName: Publish Artifacts
+
+# Publish Furiza.AspNetCore.WebApp.Authentication.CookiesByJwtBearer to NuGet.org
+- task: DotNetCoreCLI@2
+  displayName: Pack Furiza.AspNetCore.WebApp.Authentication.CookiesByJwtBearer
+  condition: eq(variables['Pack1PushToNuget'], 'True')
+  inputs:
+    command: pack
+    packagesToPack: '**/**/Furiza.AspNetCore.WebApp.Authentication.CookiesByJwtBearer.csproj'
+    versioningScheme: byEnvVar
+    versionEnvVar: Pack1Version
+- task: NuGetCommand@2
+  displayName: Push Furiza.AspNetCore.WebApp.Authentication.CookiesByJwtBearer to NuGet.org
+  condition: eq(variables['Pack1PushToNuget'], 'True')
+  continueOnError: True
+  inputs:
+    command: push
+    nuGetFeedType: external
+    packagesToPush: '$(build.artifactStagingDirectory)/Furiza.AspNetCore.WebApp.Authentication.CookiesByJwtBearer.*.nupkg'
+    publishFeedCredentials: 'apikey-nuget-aspnetcore-webapp-authentication.cookiesbyjwtbearer'
+
+# Publish Furiza.AspNetCore.WebApp.Configuration to NuGet.org
+- task: DotNetCoreCLI@2
+  displayName: Pack Furiza.AspNetCore.WebApp.Configuration
+  condition: eq(variables['Pack1PushToNuget'], 'True')
+  inputs:
+    command: pack
+    packagesToPack: '**/**/Furiza.AspNetCore.WebApp.Configuration.csproj'
+    versioningScheme: byEnvVar
+    versionEnvVar: Pack1Version
+- task: NuGetCommand@2
+  displayName: Push Furiza.AspNetCore.WebApp.Configuration to NuGet.org
+  condition: eq(variables['Pack1PushToNuget'], 'True')
+  continueOnError: True
+  inputs:
+    command: push
+    nuGetFeedType: external
+    packagesToPush: '$(build.artifactStagingDirectory)/Furiza.AspNetCore.WebApp.Configuration.*.nupkg'
+    publishFeedCredentials: 'apikey-nuget-aspnetcore-webapp-configuration'
