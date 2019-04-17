@@ -2,7 +2,7 @@
 
 namespace Furiza.AspNetCore.WebApp.Configuration
 {
-    public class reCaptchaConfiguration
+    public class ReCaptchaConfiguration
     {
         [Required]
         public string SiteKey { get; set; }

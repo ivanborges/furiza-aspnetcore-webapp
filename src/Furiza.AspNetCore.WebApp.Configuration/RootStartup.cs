@@ -93,7 +93,7 @@ namespace Furiza.AspNetCore.WebApp.Configuration
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.AddSingleton(Configuration.TryGet<reCaptchaConfiguration>());
+            services.AddSingleton(Configuration.TryGet<ReCaptchaConfiguration>());
             services.AddTransient(serviceProvider =>
             {
                 var httpClientFactory = serviceProvider.GetService<IHttpClientFactory>();

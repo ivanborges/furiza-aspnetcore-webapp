@@ -11,12 +11,12 @@ namespace Furiza.AspNetCore.WebApp.Configuration.Services
         protected readonly ISecurityProviderClient securityProviderClient;
         protected readonly CookiesManager cookiesManager;
         protected readonly IReCaptchaClient reCaptchaClient;
-        protected readonly reCaptchaConfiguration reCaptchaConfiguration;
+        protected readonly ReCaptchaConfiguration reCaptchaConfiguration;
 
         public WebApplicationLoginManager(ISecurityProviderClient securityProviderClient,
             CookiesManager cookiesManager,
             IReCaptchaClient reCaptchaClient,
-            reCaptchaConfiguration reCaptchaConfiguration)
+            ReCaptchaConfiguration reCaptchaConfiguration)
         {
             this.securityProviderClient = securityProviderClient ?? throw new ArgumentNullException(nameof(securityProviderClient));
             this.cookiesManager = cookiesManager ?? throw new ArgumentNullException(nameof(cookiesManager));
