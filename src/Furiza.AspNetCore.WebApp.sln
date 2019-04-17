@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.156
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Furiza.AspNetCore.WebApp.Authentication.CookiesByJwtBearer", "Furiza.AspNetCore.WebApp.Authentication.CookiesByJwtBearer\Furiza.AspNetCore.WebApp.Authentication.CookiesByJwtBearer.csproj", "{56FA844E-6AE0-4CBA-A8F2-CEA8458C44CA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Furiza.AspNetCore.WebApp.Configuration", "Furiza.AspNetCore.WebApp.Configuration\Furiza.AspNetCore.WebApp.Configuration.csproj", "{CDDF1EC1-361A-4F3C-BC8D-6E14318D6F77}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{56FA844E-6AE0-4CBA-A8F2-CEA8458C44CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56FA844E-6AE0-4CBA-A8F2-CEA8458C44CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56FA844E-6AE0-4CBA-A8F2-CEA8458C44CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56FA844E-6AE0-4CBA-A8F2-CEA8458C44CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDDF1EC1-361A-4F3C-BC8D-6E14318D6F77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDDF1EC1-361A-4F3C-BC8D-6E14318D6F77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDDF1EC1-361A-4F3C-BC8D-6E14318D6F77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDDF1EC1-361A-4F3C-BC8D-6E14318D6F77}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6FEA4E49-40F2-458A-B156-DABFF9AD4D61}
+	EndGlobalSection
+EndGlobal

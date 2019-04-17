@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <RuntimeFrameworkVersion>2.2.4</RuntimeFrameworkVersion>
+    <Authors>Furiza</Authors>
+    <Copyright>Furiza (C) 2019</Copyright>
+    <PackageTags>furiza;aspnet core;webapplication startup configuration</PackageTags>
+    <PackageIconUrl>https://www.imagemhost.com.br/images/2019/03/22/furiza_escrita_logo_v2.png</PackageIconUrl>
+    <RepositoryUrl>https://github.com/ivanborges/furiza-aspnetcore-webapp</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <Description>This package implements base logic for browser based web application startup configuration, including cookie authentication, automapping, exception handling and rest client through Refit.</Description>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\netcoreapp2.2\Furiza.AspNetCore.WebApp.Configuration.xml</DocumentationFile>
+    <NoWarn>1701;1702;1591</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\netcoreapp2.2\Furiza.AspNetCore.WebApp.Configuration.xml</DocumentationFile>
+    <NoWarn>1701;1702;1591</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="Furiza.AspNetCore.Authentication.JwtBearer" Version="1.7.6" />
+    <PackageReference Include="Furiza.AspNetCore.ScopedRoleAssignmentProvider" Version="1.7.6" />
+    <PackageReference Include="Furiza.Base.Core.Exceptions.Serialization" Version="1.0.6" />
+    <PackageReference Include="Furiza.Extensions.Configuration" Version="1.0.10" />
+    <PackageReference Include="Furiza.Networking" Version="1.0.2" />
+    <PackageReference Include="Furiza.Newtonsoft.Json" Version="1.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.4" />
+    <PackageReference Include="refit" Version="4.6.107" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Furiza.AspNetCore.WebApp.Authentication.CookiesByJwtBearer\Furiza.AspNetCore.WebApp.Authentication.CookiesByJwtBearer.csproj" />
+  </ItemGroup>
+
+</Project>
