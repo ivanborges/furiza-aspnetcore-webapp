@@ -17,6 +17,8 @@ namespace Furiza.AspNetCore.WebApp.Configuration.RestClients.Users
         public bool? LockoutEnabled { get; set; }
         public DateTime? LockoutEnd { get; set; }
 
+        public bool LockedOut => LockoutEnabled.HasValue && LockoutEnabled.Value && LockoutEnd.HasValue && LockoutEnd.Value.Date > DateTime.Now.Date;
+
         public class UsersGetResultInnerClaim
         {
             public string Type { get; set; }
