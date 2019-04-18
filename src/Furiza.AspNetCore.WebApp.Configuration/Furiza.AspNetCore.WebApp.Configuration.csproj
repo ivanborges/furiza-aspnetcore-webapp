@@ -24,8 +24,8 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.0.0" />
-    <PackageReference Include="Furiza.AspNetCore.Authentication.JwtBearer" Version="1.7.8" />
-    <PackageReference Include="Furiza.AspNetCore.ScopedRoleAssignmentProvider" Version="1.7.8" />
+    <PackageReference Include="Furiza.AspNetCore.Authentication.JwtBearer" Version="1.7.9" />
+    <PackageReference Include="Furiza.AspNetCore.ScopedRoleAssignmentProvider" Version="1.7.9" />
     <PackageReference Include="Furiza.Base.Core.Exceptions.Serialization" Version="1.0.6" />
     <PackageReference Include="Furiza.Extensions.Configuration" Version="1.0.10" />
     <PackageReference Include="Furiza.Networking" Version="1.0.2" />

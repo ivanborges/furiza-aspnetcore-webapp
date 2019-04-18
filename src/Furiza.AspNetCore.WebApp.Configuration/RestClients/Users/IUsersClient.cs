@@ -15,7 +15,7 @@ namespace Furiza.AspNetCore.WebApp.Configuration.RestClients.Users
         Task<UsersGetResult> GetByEmailAsync(UsersGetByEmail usersGetByEmail);
 
         [Post("/api/v1/Users")]
-        Task PostAsync(UsersPost usersPost);
+        Task<UsersPostResult> PostAsync(UsersPost usersPost);
 
         [Post("/api/v1/Users/ChangePassword")]
         Task ChangePasswordPostAsync(ChangePasswordPost changePasswordPost);
