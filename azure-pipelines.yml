@@ -18,7 +18,7 @@ variables:
   #Authentication.CookiesByJwtBearer
   #Configuration
   Pack1Version: '1.0.2'
-  Pack1PushToNuget: True
+  Pack1PushToNuget: False
 
 steps:
 # Install NuGet Tool
