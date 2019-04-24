@@ -6,6 +6,9 @@ namespace Furiza.AspNetCore.WebApp.Configuration.RestClients.Users
     public interface IUsersClient
     {
         [Get("/api/v1/Users")]
+        Task<UsersGetManyResult> GetAsync();
+
+        [Get("/api/v1/Users")]
         Task<UsersGetManyResult> GetAsync(UsersGetMany usersGetMany);
 
         [Get("/api/v1/Users/{userName}")]
