@@ -9,6 +9,6 @@ namespace Furiza.AspNetCore.WebApp.Configuration.RestClients.RoleAssignments
         Task PostAsync(RoleAssignmentsPost roleAssignmentsPost);
 
         [Delete("/api/v1/RoleAssignments")]
-        Task DeleteAsync(RoleAssignmentsDelete roleAssignmentsDelete);
+        Task DeleteAsync([Body]RoleAssignmentsDelete roleAssignmentsDelete);
     }
 }

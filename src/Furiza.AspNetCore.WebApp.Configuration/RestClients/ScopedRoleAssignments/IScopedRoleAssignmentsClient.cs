@@ -9,6 +9,6 @@ namespace Furiza.AspNetCore.WebApp.Configuration.RestClients.ScopedRoleAssignmen
         Task PostAsync(ScopedRoleAssignmentsPost scopedRoleAssignmentsPost);
 
         [Delete("/api/v1/ScopedRoleAssignments")]
-        Task DeleteAsync(ScopedRoleAssignmentsDelete scopedRoleAssignmentsDelete);
+        Task DeleteAsync([Body]ScopedRoleAssignmentsDelete scopedRoleAssignmentsDelete);
     }
 }
