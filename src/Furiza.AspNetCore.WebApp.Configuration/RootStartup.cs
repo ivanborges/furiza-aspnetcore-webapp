@@ -18,6 +18,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Refit;
+using System.Globalization;
+using System.Collections.Generic;
 
 namespace Furiza.AspNetCore.WebApp.Configuration
 {
@@ -32,6 +34,13 @@ namespace Furiza.AspNetCore.WebApp.Configuration
         public void ConfigureServices(IServiceCollection services)
         {
             AddCustomServicesAtTheBeginning(services);
+
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                options.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture(ApplicationProfile.DefaultCultureInfo);
+                options.SupportedCultures = new List<CultureInfo> { new CultureInfo(ApplicationProfile.DefaultCultureInfo) };
+                options.RequestCultureProviders.Clear();
+            });
 
             services.Configure<CookiePolicyOptions>(options =>
             {
@@ -109,6 +118,8 @@ namespace Furiza.AspNetCore.WebApp.Configuration
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            app.UseRequestLocalization();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

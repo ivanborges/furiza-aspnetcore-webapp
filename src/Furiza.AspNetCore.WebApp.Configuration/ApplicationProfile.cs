@@ -6,5 +6,6 @@ namespace Furiza.AspNetCore.WebApp.Configuration
     {
         public Guid? ClientId { get; set; }
         public string ErrorPage { get; set; }
+        public string DefaultCultureInfo { get; set; }
     }
 }
