@@ -17,7 +17,7 @@ variables:
   #Pack1 -------------------
   #Authentication.CookiesByJwtBearer
   #Configuration
-  Pack1Version: '1.0.4'
+  Pack1Version: '1.0.5'
   Pack1PushToNuget: False
 
 steps:
