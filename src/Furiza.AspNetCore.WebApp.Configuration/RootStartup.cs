@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
+using Furiza.AspNetCore.ScopedRoleAssignmentProvider;
 using Furiza.AspNetCore.WebApp.Authentication.CookiesByJwtBearer;
 using Furiza.AspNetCore.WebApp.Authentication.CookiesByJwtBearer.Services;
-using Furiza.AspNetCore.ScopedRoleAssignmentProvider;
 using Furiza.AspNetCore.WebApp.Configuration.ExceptionHandling;
 using Furiza.AspNetCore.WebApp.Configuration.RestClients.Auth;
 using Furiza.AspNetCore.WebApp.Configuration.RestClients.ReCaptcha;
@@ -18,8 +18,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Refit;
-using System.Globalization;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 
 namespace Furiza.AspNetCore.WebApp.Configuration
 {
@@ -113,7 +114,8 @@ namespace Furiza.AspNetCore.WebApp.Configuration
 
             AddCustomServicesAtTheEnd(services);
 
-            services.AddAutoMapper();
+            if (ApplicationProfile.AutomapperAssemblies.Any())
+                services.AddAutoMapper(ApplicationProfile.AutomapperAssemblies);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
