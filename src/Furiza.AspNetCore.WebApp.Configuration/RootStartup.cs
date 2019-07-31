@@ -10,7 +10,9 @@ using Furiza.AspNetCore.WebApp.Configuration.RestClients.Roles;
 using Furiza.AspNetCore.WebApp.Configuration.RestClients.ScopedRoleAssignments;
 using Furiza.AspNetCore.WebApp.Configuration.RestClients.Users;
 using Furiza.AspNetCore.WebApp.Configuration.Services;
+using Furiza.Base.Core.Identity.Abstractions;
 using Furiza.Networking.Abstractions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -114,6 +116,8 @@ namespace Furiza.AspNetCore.WebApp.Configuration
                 return RestService.For<IReCaptchaClient>(httpClient);
             });
 
+            services.AddAuthorization(AddAuthorizationOptions);
+
             AddCustomServicesAtTheEnd(services);
 
             if (AutomapperAssemblies.Any())
@@ -147,6 +151,15 @@ namespace Furiza.AspNetCore.WebApp.Configuration
 
             AddCustomMiddlewaresToTheEndOfThePipeline(app);
         }
+
+        #region [+] Virtual
+        protected virtual void AddAuthorizationOptions(AuthorizationOptions options)
+        {
+            options.AddPolicy(FurizaPolicies.RequireAdministratorRights, policy => policy.RequireRole(FurizaMasterRoles.Superuser, FurizaMasterRoles.Administrator));
+            options.AddPolicy(FurizaPolicies.RequireEditorRights, policy => policy.RequireRole(FurizaMasterRoles.Superuser, FurizaMasterRoles.Administrator, FurizaMasterRoles.Editor));
+            options.AddPolicy(FurizaPolicies.RequireApproverRights, policy => policy.RequireRole(FurizaMasterRoles.Superuser, FurizaMasterRoles.Administrator, FurizaMasterRoles.Editor, FurizaMasterRoles.Approver));
+        }
+        #endregion
 
         #region [+] Abstract
         protected abstract void AddCustomServicesAtTheBeginning(IServiceCollection services);
