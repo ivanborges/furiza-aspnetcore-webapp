@@ -21,11 +21,13 @@ using Refit;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
 
 namespace Furiza.AspNetCore.WebApp.Configuration
 {
     public abstract class RootStartup
     {
+        protected ICollection<Assembly> AutomapperAssemblies { get; } = new List<Assembly>() { typeof(WebApplicationConfigurationAutoMapperProfile).Assembly };
         protected abstract ApplicationProfile ApplicationProfile { get; }
         protected IConfiguration Configuration { get; }
 
@@ -114,8 +116,8 @@ namespace Furiza.AspNetCore.WebApp.Configuration
 
             AddCustomServicesAtTheEnd(services);
 
-            if (ApplicationProfile.AutomapperAssemblies.Any())
-                services.AddAutoMapper(ApplicationProfile.AutomapperAssemblies);
+            if (AutomapperAssemblies.Any())
+                services.AddAutoMapper(AutomapperAssemblies);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
